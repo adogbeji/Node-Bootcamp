@@ -27,7 +27,7 @@ const tourSchema = new mongoose.Schema({
   },
   rating: {
     type: Number,
-    default: 4.5  // Value to be used if vield is missing
+    default: 4.5  // Value to be used if field is missing
   },
   price: {
     type: Number,
