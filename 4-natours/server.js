@@ -37,6 +37,19 @@ const tourSchema = new mongoose.Schema({
 
 const Tour = mongoose.model('Tour', tourSchema);
 
+const testTour = new Tour({  // testTour is an instance of the Tour Model
+  name: 'The Park Camper',
+  price: 997
+});
+
+// NB: Code below should be commented out to prevent duplicate insertion!
+
+// testTour.save().then(doc => {
+//   console.log(doc);
+// }).catch(err => {
+//   console.log('ERROR: ', err);
+// });
+
 const port = process.env.PORT || 3000;
 
 app.listen(port, (req, res) => {
