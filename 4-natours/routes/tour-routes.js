@@ -6,13 +6,13 @@ const tourController = require("./../controllers/tour-controller");
 
 const router = express.Router();  //Router for 'Tours' resource
 
-router.param("id", tourController.checkID);
+// router.param("id", tourController.checkID);
 
 //Tours resource
 router
 .route("/")
 .get(tourController.getAllTours)
-.post(tourController.checkBody, tourController.createTour);
+.post(tourController.createTour);
 
 
 router
