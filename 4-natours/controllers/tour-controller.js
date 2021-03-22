@@ -3,28 +3,42 @@
 
 const Tour = require('./../models/tour-model');
 
-exports.getAllTours = (req, res) => {
-  res.status(200).json({
-    status: "success",  //Status can either be 'success', 'fail' or 'error'.
-    requestedAt: req.requestTime,
-    // results: tours.length,  //This field isn't essential, but shows client the number of results/objects we are sending
-    // data: {
-    //   tours: tours  //In ES6, there's no need to specify both key AND value if they have the same name!
-    // }
-  });
+exports.getAllTours = async (req, res) => {
+  try {
+    const tours = await Tour.find();
+
+    res.status(200).json({
+      status: "success",  //Status can either be 'success', 'fail' or 'error'.
+      results: tours.length,  //This field isn't essential, but shows client the number of results/objects we are sending
+      data: {
+        tours: tours  //In ES6, there's no need to specify both key AND value if they have the same name!
+      }
+    });
+  } catch(err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err
+    });
+  }
 };
 
-exports.getTour = (req, res) => {  //Route which can accept a variable(eg.id)
-  const id = req.params.id * 1;  //This will convert the id from string --> number data type
+exports.getTour = async (req, res) => {  //Route which can accept a variable(eg.id)
+  try {
+    const tour = await Tour.findById(req.params.id);
+    // MongoDB equivalent:- Tour.findOne({ _id: req.params.id })
 
-  // const tour = tours.find(el => el.id === id);
-  //
-  // res.status(200).json({
-  //   status: "success",
-  //   data: {
-  //     tour
-  //   }
-  // });
+    res.status(200).json({
+      status: "success",
+      data: {
+        tour
+      }
+    });
+  } catch(err) {
+    res.status(404).json({
+      status: 'fail',
+      message: err
+    });
+  }
 };
 
 exports.createTour = async (req, res) => {

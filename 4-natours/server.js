@@ -19,7 +19,7 @@ mongoose.connect(DB, {
   console.log('MongoDB Connected!');
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 
 app.listen(port, (req, res) => {
   console.log(`Listening on port ${port}...`);
